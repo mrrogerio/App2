@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Views.Login">
+    <ContentPage.Content>
+        <Grid>
+            <Image Opacity="1" Source="ecommerce.jpg" Aspect="AspectFill"/>
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Padding="30" Spacing="10">
+
+                <Label Text="Usuário"  HorizontalOptions="CenterAndExpand" VerticalOptions ="CenterAndExpand" 
+                       FontSize="Large" TextColor="White" FontAttributes="Bold" />
+                <Entry Text="{Binding Path=Username}" x:Name="usernameEntry" 
+                       BackgroundColor="White" TextColor="Black" FontAttributes="Bold" />
+
+                <Label Text="Senha" HorizontalOptions="CenterAndExpand" VerticalOptions ="CenterAndExpand" 
+                FontSize="Large" TextColor="White" FontAttributes="Bold" />
+                <Entry Text="{Binding Path=Password}" IsPassword="true" x:Name="passwordEntry" 
+                       BackgroundColor="White" TextColor="Black" FontAttributes="Bold"/>
+
+                <Button Text="Login" Clicked="OnLoginClicked" BackgroundColor="#3B5998" TextColor="White"  
+                        FontAttributes="Bold"
+                         ContentLayout="Right,0"
+                        Image="login20.png"/>
+                <Button Text="Exit" Clicked="OnExitClicked" BackgroundColor="#3B5998" TextColor="White"
+                        FontAttributes="Bold"
+                        VerticalOptions="CenterAndExpand"
+                        ContentLayout="Right,0"
+                        Image="logout20.png"/>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding IsBusy}" Padding="12" 
+                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                         AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                         VerticalOptions="Center" 
+                         HorizontalOptions="Center" >
+                <ActivityIndicator IsRunning="{Binding IsBusy}" Color ="#3B5998"/>
+                <Label Text="Loading..." HorizontalOptions="Center" TextColor="White" BackgroundColor="#3B5998"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

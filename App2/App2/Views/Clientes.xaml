@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
+             x:Class="App2.Views.Clientes"
+             Title="Clientes">
+    <ContentPage.Content>
+        <StackLayout Padding="5">
+            <StackLayout Orientation="Vertical" 
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand" 
+                         Padding="1"
+                         x:Name="stckDadosCliente">
+                <StackLayout IsVisible="{Binding IsBusy}" Padding="12" 
+                             AbsoluteLayout.LayoutFlags="PositionProportional"
+                             AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                             VerticalOptions="Center" 
+                             HorizontalOptions="Center">
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color ="#3B5998"/>
+                    <Label Text="Procurando Cliente..." HorizontalOptions="Center" TextColor="White" BackgroundColor="#3B5998"/>
+                </StackLayout>
+                <Frame HasShadow="true" OutlineColor="White" BackgroundColor="#3B5998" Padding="1">
+                    <Label x:Name="lblInicio" Text="Buscar Cliente" FontSize="Small" FontAttributes="Bold" TextColor="White"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand">
+                    </Label>
+                </Frame>
+                <Grid Padding="0,0,0,0" MinimumHeightRequest="100" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Entry x:Name="userCodeEntry" Placeholder="Pesquisar" Keyboard="Numeric" Grid.Row="0" Grid.Column="0"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand"/>
+                    <Button x:Name="btnProcurarCliente" BackgroundColor="#3B5998" Clicked="ConsultaCliente" TextColor="White" Grid.Row="0" Grid.Column="1" 
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="EndAndExpand"
+                            WidthRequest="50" HeightRequest="50" BorderRadius="25" Image="search30.png"/>
+                </Grid>
+                <Frame HasShadow="true" OutlineColor="White" BackgroundColor="#3B5998" Padding="1">
+                    <Label x:Name="lblCliente" Text="Dados do Cliente" FontSize="Small" FontAttributes="Bold" TextColor="White"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand" 
+                           VerticalOptions="CenterAndExpand">
+                    </Label>
+                </Frame>
+                <ScrollView Padding="0" Orientation="Vertical">
+                    <StackLayout Padding="0" Orientation="Vertical" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Grid Padding="0,0,0,0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="9*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="R. Social:" Grid.Column="0" Grid.Row="0"/>
+                            <Entry Placeholder="Razão Social" x:Name="lblRazaoSocial" FontSize="Small" Grid.Column="1" Grid.Row="0"/>
+
+                            <Label Text="N. Fantasia:" Grid.Column="0" Grid.Row="1" />
+                            <Entry Placeholder="Nome Fantasia" x:Name="lblNomeFantasia" FontSize="Small" Grid.Column="1" Grid.Row="1" />
+
+                            <Label Text="Telefone:" Grid.Column="0" Grid.Row="2"  />
+                            <Entry Placeholder="Fone" Keyboard="Telephone" x:Name="lblTelefone" FontSize="Small" Grid.Column="1" Grid.Row="2" />
+
+                            <Label Text="Email:" Grid.Column="0" Grid.Row="3" />
+                            <Entry Placeholder="Email" Keyboard="Email" x:Name="lblEmail" FontSize="Small" Grid.Column="1" Grid.Row="3" />
+
+                            <Grid Padding="0,0,0,0" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="6*" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Cep:" Grid.Column="0" Grid.Row="0"  />
+                                <Entry Placeholder="Cep" x:Name="lblCep" FontSize="Small" Grid.Column="1" Grid.Row="0"  />
+                                <Button x:Name="btnBuscaCep" Grid.Column="2" Grid.Row="0"
+                                        BackgroundColor="#3b5998" TextColor="White"
+                                        HorizontalOptions="StartAndExpand"
+                                        VerticalOptions="StartAndExpand" 
+                                        WidthRequest="50" HeightRequest="50" BorderRadius="25" 
+                                        Image="cep.png"/>
+                            </Grid>
+
+                            <Label Text="Endereço:" Grid.Column="0" Grid.Row="5" />
+                            <Entry Placeholder="Endereço" x:Name="lblEndereco" FontSize="Small" Grid.Column="1" Grid.Row="5" />
+
+                            <Label Text="Número:" Grid.Column="0" Grid.Row="6" />
+                            <Entry Placeholder="Número" x:Name="lblNumero" FontSize="Small" Grid.Column="1" Grid.Row="6" />
+
+                            <Label Text="Bairro:" Grid.Column="0" Grid.Row="7" />
+                            <Entry Placeholder="Bairro" x:Name="lblBairro" FontSize="Small"  Grid.Column="1" Grid.Row="7" />
+
+                            <Label Text="Cidade:" Grid.Column="0" Grid.Row="8" />
+                            <Entry Placeholder="Cidade" x:Name="lblMunicipio" FontSize="Small" Grid.Column="1" Grid.Row="8"/>
+
+                            <Label Text="Estado:" Grid.Column="0" Grid.Row="9" />
+                            <Entry Placeholder="Estado" x:Name="lblEstado" FontSize="Small" Grid.Column="1" Grid.Row="9"/>
+
+                            <Label Text="I.E:" Grid.Column="0" Grid.Row="10" />
+                            <Entry Placeholder="Inscrição Estadual" x:Name="lblIE" FontSize="Small" Grid.Column="1" Grid.Row="10" />
+
+                            <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="11"
+                                         HorizontalOptions="EndAndExpand" 
+                                         VerticalOptions="EndAndExpand"
+                                         Padding="1"
+                                         x:Name="stckbotao">
+                                <StackLayout Orientation="Horizontal">
+                                    <Button Text="Sair" 
+                                            Clicked="CancelaCliente" x:Name="btnCancelaCliente" 
+                                            IsEnabled="true" 
+                                            BackgroundColor="#3b5998" TextColor="White"
+                                            HorizontalOptions="StartAndExpand"
+                                            VerticalOptions="StartAndExpand" 
+                                            WidthRequest="50" HeightRequest="50" BorderRadius="25" 
+                                            Image="previous10.png"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Button Text="Cadastrar" 
+                                            Clicked="CadastraCliente" x:Name="btnCadastraCliente" 
+                                            IsEnabled="false"
+                                            BackgroundColor="#3b5998" TextColor="White"
+                                            HorizontalOptions="StartAndExpand" 
+                                            VerticalOptions="StartAndExpand"
+                                            WidthRequest="50" HeightRequest="50" BorderRadius="25" 
+                                            Image="addcli30.png"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

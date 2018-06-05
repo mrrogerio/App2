@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Views.HomePage"
+             Title="Brasil Tropical">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Home" TextColor="#3B5998"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               FontSize="Large"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
