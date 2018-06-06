@@ -127,5 +127,18 @@ namespace App2.Utils
             return somePref.ToString();
 
         }
+        public static void SalvaMostraSenha(Boolean mostra)
+        {
+            var prefs = Application.Context.GetSharedPreferences("showPass", FileCreationMode.Private);
+            var prefEditor = prefs.Edit();
+            prefEditor.PutBoolean("MostraSenha", mostra);
+            prefEditor.Commit();
+        }
+        public static bool RetornaMostraSenha()
+        {
+            var prefs = Application.Context.GetSharedPreferences("showPass", FileCreationMode.Private);
+            var somePref = prefs.GetBoolean("MostraSenha", false);
+            return somePref;
+        }
     }
 }

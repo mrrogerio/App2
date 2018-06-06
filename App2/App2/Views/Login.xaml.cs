@@ -34,6 +34,10 @@ namespace App2.Views
                 usernameEntry.Text = partsFromString[0];
                 passwordEntry.Text = partsFromString[1];
             }
+            var tog = Util.RetornaMostraSenha();
+            swtcSenha.IsToggled = tog;
+
+            Util.SalvaMostraSenha(swtcSenha.IsToggled);
         }
 
         protected override void OnAppearing()
@@ -111,7 +115,7 @@ namespace App2.Views
             }
             else
             {
-                await DisplayAlert("Alerta!", "Falha na conexão, verifique sua conexão < br > e tente novamente.", "OK");
+                await DisplayAlert("Alerta!", "Falha na conexão, verifique sua conexão <br> e tente novamente.", "OK");
                 return;
             }
         }
@@ -147,6 +151,8 @@ namespace App2.Views
             {
                 GlobalVariables.GlobalFuncionarioLogado = funcionario;
                 Util.saveSettings(usuario, senha);
+                Util.SalvaMostraSenha(swtcSenha.IsToggled);
+
                 await Navigation.PushModalAsync(new MainPage());
             }
             else

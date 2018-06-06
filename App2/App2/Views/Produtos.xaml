@@ -5,6 +5,12 @@
              Title="Produtos">
     <ContentPage.Content>
         <StackLayout>
+            <Frame HasShadow="true" OutlineColor="White" BackgroundColor="#3B5998" Padding="1">
+                <Label x:Name="lblProdutos" Text="produtos" FontSize="Small" FontAttributes="Bold" TextColor="White"
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand"/>
+            </Frame>
             <SearchBar Placeholder="Buscar produtos..." TextColor="Black" TextChanged="Produtos_TextChanged"/>
 
             <Label x:Name="lblmsg" TextColor="Red" FontSize="20" IsVisible="False"  HorizontalOptions="Center" VerticalOptions="Center"/>

@@ -271,5 +271,36 @@ namespace App2.Services
                 }
             }
         }
+
+        public async Task<Int16> DeletaPedidoItem(Int32 id_pedido, string codigo_produto)
+        {
+            if (id_pedido == 0 || string.IsNullOrEmpty(codigo_produto))
+            {
+                return 0;
+            }
+            else
+            {
+                string url = Uri.EscapeUriString(string.Format("http://mrsistemas.net/grupo_mr_api/api/PedidoItem/DeletaPedidoItem?id_pedido={0}&codigo_produto{1}", id_pedido, codigo_produto));
+
+                _client = new HttpClient();
+                var response = await _client.GetAsync(url);
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return 0;
+                }
+                else
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    if (Convert.ToInt16(content) > 0)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
     }
 }

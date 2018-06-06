@@ -53,6 +53,7 @@ namespace App2.Views
             {
                 ECqtde.Keyboard = Keyboard.Numeric;
                 ECqtde.Focus();
+                lblItemSelecionado.TextColor = Color.FromHex("#3B5998");
                 BuscaNomeProduto();
             };
 
@@ -94,10 +95,8 @@ namespace App2.Views
                     ProdutosService prodService = new ProdutosService();
                     List<ProdutosModel> prod = new List<ProdutosModel>();
                     prod = await prodService.BuscaProdutosPorCodigo(ECcodigo.Text, GlobalVariables.campanha);
-
                     if (prod != null && prod.Count > 0)
                     {
-                        lblItemSelecionado.TextColor = Color.FromHex("#3B5998");
                         lblItemSelecionado.HorizontalTextAlignment = TextAlignment.Start;
                         lblItemDigitado.Text = prod[0].NomeProduto + " - " + "Valor R$ " + prod[0].Preco.ToString();
                     }
@@ -322,6 +321,28 @@ namespace App2.Views
                 }
                 ProdutosService prodService = new ProdutosService();
                 List<ProdutosModel> prod = new List<ProdutosModel>();
+                if (ECqtde.Text == "0")
+                {
+                    PedidoItemService novoItem = new PedidoItemService();
+                    var answer = await DisplayAlert("Alerta!", "Deseja excluir o item" + ECcodigo.Text + "? ", "Sim", "Não");
+                    if (answer)
+                    {
+                        var deletou = await novoItem.DeletaPedidoItem(GlobalVariables.GlobalPedido.IdPedido, ECcodigo.Text);
+                        if (deletou > 0)
+                        {
+                            await DisplayAlert("Alerta!", "Item deletado com sucesso.", "OK");
+                        }
+                        else
+                        {
+                            await DisplayAlert("Alerta!", "Falha ao excluir item. Tente novamente.", "OK");
+                        }
+                    }
+                    ECcodigo.Text = "";
+                    ECqtde.Text = "";
+                    lblItemDigitado.Text = "";
+                    ECcodigo.Focus();
+                    return;
+                }
                 prod = await prodService.BuscaProdutosPorCodigo(ECcodigo.Text, GlobalVariables.campanha);
 
                 if (prod != null && prod.Count > 0)
@@ -523,7 +544,7 @@ namespace App2.Views
             try
             {
                 listViewItem.IsVisible = true;
-                lblmsg.IsVisible = false;
+                //lblmsg.IsVisible = false;
                 listViewItem.ItemsSource = lst;
                 listViewItem.BindingContext = lst;
             }
@@ -844,16 +865,16 @@ namespace App2.Views
                         // esconde o listview e exibe o label
                         // exibe a mensagem no label
                         listViewItem.IsVisible = false;
-                        lblmsg.IsVisible = true;
-                        lblmsg.Text = "Produto não encontrado.";
-                        lblmsg.TextColor = Color.Red;
+                        //lblmsg.IsVisible = true;
+                        //lblmsg.Text = "Produto não encontrado.";
+                        //lblmsg.TextColor = Color.Red;
                     }
                     else
                     {
                         // exibe o listview e esconde o label 
                         // exibe a lista de produtos
                         listViewItem.IsVisible = true;
-                        lblmsg.IsVisible = false;
+                        //lblmsg.IsVisible = false;
                         listViewItem.ItemsSource = pedItem;
                         listViewItem.BindingContext = pedItem;
                     }
@@ -867,7 +888,7 @@ namespace App2.Views
                         // exibe o listview e esconde o label 
                         // exibe a lista de produtos
                         listViewItem.IsVisible = true;
-                        lblmsg.IsVisible = false;
+                        //lblmsg.IsVisible = false;
                         listViewItem.ItemsSource = pedItem;
                         listViewItem.BindingContext = pedItem;
                     }
@@ -875,8 +896,8 @@ namespace App2.Views
                     {
                         // esconde o listview e exibe o label coma mensagem
                         listViewItem.IsVisible = false;
-                        lblmsg.IsVisible = true;
-                        lblmsg.Text = "Digite a descrição ou código do produto.";
+                        //lblmsg.IsVisible = true;
+                        //lblmsg.Text = "Digite a descrição ou código do produto.";
                     }
                 }
 
@@ -887,4 +908,5 @@ namespace App2.Views
             }
         }
     }
+
 }

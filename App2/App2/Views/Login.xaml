@@ -17,6 +17,21 @@
                 <Entry Text="{Binding Path=Password}" IsPassword="true" x:Name="passwordEntry" 
                        BackgroundColor="White" TextColor="Black" FontAttributes="Bold"/>
 
+                <Grid Padding="0,0,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Lembrar senha" FontSize="Medium" TextColor="White" FontAttributes="Bold"
+                           HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"
+                           Grid.Row="0" Grid.Column="0"/>
+                    <Switch VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand"  IsToggled="{Binding MostraSenha}"
+                            Grid.Row="0" Grid.Column="1" x:Name="swtcSenha"/>
+                </Grid>
+
                 <Button Text="Login" Clicked="OnLoginClicked" BackgroundColor="#3B5998" TextColor="White"  
                         FontAttributes="Bold"
                          ContentLayout="Right,0"

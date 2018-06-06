@@ -16,7 +16,6 @@ namespace App2.Services
     {
         private HttpClient _client = new HttpClient();
         private List<FormaPagamentoModel> _lstPagamento;
-        private FormaPagamentoModel _pagamento;
 
         public async Task<List<FormaPagamentoModel>> RetornaFormaPagamento()
         {
