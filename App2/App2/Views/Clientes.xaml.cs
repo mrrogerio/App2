@@ -27,27 +27,6 @@ namespace App2.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            //lblCep.Completed += (s, e) =>
-            //{
-            //    if (!string.IsNullOrWhiteSpace(lblCep.Text))
-            //    {
-            //        try
-            //        {
-            //            Address endereco = SearchZip.GetAddress(lblCep.Text,20000);
-            //            if (endereco.Zip != null)
-            //            {
-            //                if (string.IsNullOrEmpty(lblEndereco.Text)) { lblEndereco.Text = endereco.Street; }
-            //                if (string.IsNullOrEmpty(lblMunicipio.Text)) { lblMunicipio.Text = endereco.City; }
-            //                if (string.IsNullOrEmpty(lblEstado.Text)) { lblEstado.Text = endereco.State; }
-            //                if (string.IsNullOrEmpty(lblBairro.Text)) { lblBairro.Text = endereco.District; }
-            //            }
-            //        }
-            //        catch (Exception)
-            //        {
-            //        }
-            //    }
-            //};
         }
         private bool ValidaCampos()
         {
@@ -194,7 +173,7 @@ namespace App2.Views
             ClienteService clienteLogado = new ClienteService();
             ClienteModel cliente = new ClienteModel();
             cliente = await clienteLogado.BuscaClientePorCnpj(buscaCliente);
-            IsBusy=false;
+            IsBusy = false;
 
             if (cliente != null && cliente.IdCliente > 0)
             {
@@ -325,6 +304,29 @@ namespace App2.Views
             }
             // Following line used to display given phone number in dialer  
             Device.OpenUri(new Uri(String.Format("tel:{0}", phoneNumber)));
+        }
+
+        async Task BuscaCep()
+        {
+
+            CepService srvCep = new CepService();
+            CepModel cep = new CepModel();
+            cep = await srvCep.BuscaCep(lblCep.Text);
+
+            if (cep == null || cep.Cep == "")
+            {
+                await DisplayAlert("Alerta!", "Falha ao procurar o Cep.", "OK");
+                return;
+            }
+            else
+            {
+                lblEndereco.Text = cep.Logradouro;
+                lblMunicipio.Text = cep.Localidade;
+                lblEstado.Text = cep.UF;
+                lblBairro.Text = cep.Bairro;
+                lblComplemento.Text = cep.Complemento;
+            }
+           
         }
     }
 }

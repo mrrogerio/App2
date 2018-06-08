@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Model\CepModel.cs" />
     <Compile Include="Model\ClienteModel.cs" />
     <Compile Include="Model\FormaPagamentoModel.cs" />
     <Compile Include="Model\LoginFuncModel.cs" />
@@ -43,6 +44,7 @@
     <Compile Include="Model\PedidoItemModel.cs" />
     <Compile Include="Model\PedidoModel.cs" />
     <Compile Include="Model\ProdutosModel.cs" />
+    <Compile Include="Services\CepService.cs" />
     <Compile Include="Services\ClienteService.cs" />
     <Compile Include="Services\FormaPagamentoService.cs" />
     <Compile Include="Services\LoginFuncService.cs" />
@@ -92,7 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android">
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v8.1\Mono.Android.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v8.0\Mono.Android.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
