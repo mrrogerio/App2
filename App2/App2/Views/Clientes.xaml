@@ -17,7 +17,7 @@
                              VerticalOptions="Center" 
                              HorizontalOptions="Center">
                     <ActivityIndicator IsRunning="{Binding IsBusy}" Color ="#3B5998"/>
-                    <Label Text="Procurando Cliente..." HorizontalOptions="Center" TextColor="White" BackgroundColor="#3B5998"/>
+                    <Label Text="Procurando..." HorizontalOptions="Center" TextColor="White" BackgroundColor="#3B5998"/>
                 </StackLayout>
                 <Frame HasShadow="true" OutlineColor="White" BackgroundColor="#3B5998" Padding="1">
                     <Label x:Name="lblInicio" Text="Buscar Cliente" FontSize="Small" FontAttributes="Bold" TextColor="White"

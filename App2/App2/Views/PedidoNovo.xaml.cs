@@ -907,6 +907,9 @@ namespace App2.Views
 
             }
         }
+        private async void bntProcurarItem_OnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Produtos());
+        }
     }
-
 }

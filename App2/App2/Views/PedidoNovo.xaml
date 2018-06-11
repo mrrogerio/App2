@@ -190,6 +190,7 @@
                            FontSize="Medium"/>
                     <Button Grid.Row="0" Grid.Column="4"
                                 x:Name="bntProcurarItem"
+                                Clicked="bntProcurarItem_OnClicked"
                                 IsEnabled="True"
                                 BackgroundColor="#3B5998" TextColor="White"
                                 VerticalOptions="CenterAndExpand" 

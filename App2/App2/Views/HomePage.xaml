@@ -9,6 +9,14 @@
                FontAttributes="Bold"
                HorizontalOptions="Center"
                FontSize="Large"/>
+            <WebView Source="https://www.google.com/" x:Name="o_webview" 
+                     WidthRequest="1000" HeightRequest="1000" 
+                     Navigating="webOnNavigating" Navigated="webOnEndNavigating" />
+            <Label x:Name="LoadingLabel" Text="Loading..." HorizontalOptions="Center" IsVisible="false" />
+            <!--<StackLayout Orientation="Horizontal" Padding="10,10">
+                <Button x:Name="o_back" Text="&lt;" FontSize="Large" HorizontalOptions="StartAndExpand" Clicked="backClicked" />
+                <Button x:Name="o_forward" Text="&gt;" FontSize="Large" HorizontalOptions="End" Clicked="forwardClicked" />
+            </StackLayout>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
