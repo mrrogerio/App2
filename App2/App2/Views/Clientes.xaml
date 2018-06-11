@@ -95,7 +95,7 @@
                                     <ColumnDefinition Width="2*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Text="Cep:" Grid.Column="0" Grid.Row="0"  />
-                                <Entry Placeholder="Cep" x:Name="lblCep" FontSize="Small" Grid.Column="1" Grid.Row="0"  />
+                                <Entry Placeholder="Cep" x:Name="lblCep" FontSize="Small" Keyboard="Numeric" Grid.Column="1" Grid.Row="0"  />
                                 <Button x:Name="btnBuscaCep" Grid.Column="2" Grid.Row="0"
                                         Clicked="BuscaCep"
                                         BackgroundColor="#3b5998" TextColor="White"

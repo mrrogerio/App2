@@ -272,8 +272,10 @@ namespace App2.Views
         }
         async Task<bool> CadastraCliente(ClienteModel cliente)
         {
+            IsBusy = true;
             ClienteService clienteCad = new ClienteService();
             cliente = await clienteCad.CadastraCliente(cliente);
+            IsBusy = false;
 
             if (cliente == null || cliente.IdCliente == 0)
             {
@@ -308,11 +310,16 @@ namespace App2.Views
 
         async Task BuscaCep()
         {
-
+            if (string.IsNullOrWhiteSpace(lblCep.Text))
+            {
+                await DisplayAlert("Alerta!", "Digite o Cep para procurar.", "OK");
+                return;
+            }
+            IsBusy = true;
             CepService srvCep = new CepService();
             CepModel cep = new CepModel();
             cep = await srvCep.BuscaCep(lblCep.Text);
-
+            IsBusy = false;
             if (cep == null || cep.Cep == "")
             {
                 await DisplayAlert("Alerta!", "Falha ao procurar o Cep.", "OK");
@@ -326,7 +333,7 @@ namespace App2.Views
                 lblBairro.Text = cep.Bairro;
                 lblComplemento.Text = cep.Complemento;
             }
-           
+
         }
     }
 }
