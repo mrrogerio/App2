@@ -39,7 +39,10 @@ namespace App2.Services
                     string content = await response.Content.ReadAsStringAsync();
                     JObject output = JObject.Parse(content);
                     _cep = new CepModel();
-
+                    if (output.ToString().Contains("erro"))
+                    {
+                        return _cep;
+                    }
                     _cep.Cep = output.SelectToken("cep").ToString()?.Trim();
                     _cep.Logradouro = output.SelectToken("logradouro").ToString()?.Trim();
                     _cep.Complemento = output.SelectToken("complemento").ToString()?.Trim();

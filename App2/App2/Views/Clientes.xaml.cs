@@ -320,7 +320,7 @@ namespace App2.Views
             CepModel cep = new CepModel();
             cep = await srvCep.BuscaCep(lblCep.Text);
             IsBusy = false;
-            if (cep == null || cep.Cep == "")
+            if (cep.Cep == null)
             {
                 await DisplayAlert("Alerta!", "Falha ao procurar o Cep.", "OK");
                 return;
@@ -333,7 +333,6 @@ namespace App2.Views
                 lblBairro.Text = cep.Bairro;
                 lblComplemento.Text = cep.Complemento;
             }
-
         }
     }
 }

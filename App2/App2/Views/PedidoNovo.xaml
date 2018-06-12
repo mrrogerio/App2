@@ -199,18 +199,19 @@
                 </Grid>
             </StackLayout>
             <StackLayout Orientation="Vertical" 
-                         HorizontalOptions="CenterAndExpand"
+                         HorizontalOptions="FillAndExpand"
                          VerticalOptions="FillAndExpand" 
                          Padding="0">
                 <Frame HasShadow="true" OutlineColor="White" BackgroundColor="#3B5998" Padding="1">
                     <Label x:Name="lblDigitados" Text="Itens do Pedido" FontSize="Small" FontAttributes="Bold" TextColor="White"
                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
-                       HorizontalOptions="CenterAndExpand" 
-                       VerticalOptions="CenterAndExpand"/>
+                       HorizontalOptions="FillAndExpand" 
+                       VerticalOptions="FillAndExpand"/>
                 </Frame>
                 <StackLayout>
                     <ListView x:Name="listViewItem"
                                   VerticalOptions="FillAndExpand"
+                              HorizontalOptions="FillAndExpand"
                                   HasUnevenRows="true"
                                   CachingStrategy="RecycleElement">
                         <ListView.Header>
@@ -222,7 +223,7 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Orientation="Vertical" Padding="1">
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                             <Grid Padding="0,0,0,0">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto"/>

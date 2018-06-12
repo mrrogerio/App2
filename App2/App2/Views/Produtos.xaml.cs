@@ -38,8 +38,6 @@ namespace App2.Views
                                                                                    " AND c.id_campanha=" + GlobalVariables.campanha);
                 if (produtos == null || produtos.Count == 0)
                 {
-                    // esconde o listview e exibe o label
-                    // exibe a mensagem no label
                     lvwProdutos.IsVisible = false;
                     lblmsg.IsVisible = true;
                     lblmsg.Text = "Produto não encontrado.";
@@ -47,8 +45,6 @@ namespace App2.Views
                 }
                 else
                 {
-                    // exibe o listview e esconde o label 
-                    // exibe a lista de produtos
                     lvwProdutos.IsVisible = true;
                     lblmsg.IsVisible = false;
                     lvwProdutos.ItemsSource = produtos;
@@ -56,7 +52,6 @@ namespace App2.Views
             }
             else
             {
-                // esconde o listview e exibe o label coma mensagem
                 lvwProdutos.IsVisible = false;
                 lblmsg.IsVisible = true;
                 lblmsg.Text = "Digite a descrição ou código do produto.";
