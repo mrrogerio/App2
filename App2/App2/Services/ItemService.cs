@@ -22,7 +22,7 @@ namespace App2.Services
             var pagina1 = new MasterPageItem() { Title = "Home", Icon = "Home32.png", TargetType = typeof(HomePage) };
             var pagina2 = new MasterPageItem() { Title = "Novo Pedido", Icon = "Pedido32.png", TargetType = typeof(PedidoNovo) };
             var pagina3 = new MasterPageItem() { Title = "Produtos", Icon = "Produto32.png", TargetType = typeof(Produtos) };
-            var pagina4 = new MasterPageItem() { Title = "Clientes", Icon = "Cliente.png", TargetType = typeof(Clientes) };
+            var pagina4 = new MasterPageItem() { Title = "Clientes", Icon = "Cliente32.png", TargetType = typeof(Clientes) };
             //var pagina3 = new MasterPageItem() { Title = "Lançamentos", Icon = "CheckBook32.png", TargetType = typeof(LancamentosPage) };
             //var pagina4 = new MasterPageItem() { Title = "Relatórios", Icon = "BarChart32.png", TargetType = typeof(RelatoriosPage) };
             // Adicionando items no menuLista

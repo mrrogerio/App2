@@ -195,7 +195,7 @@
                                 BackgroundColor="#3B5998" TextColor="White"
                                 VerticalOptions="CenterAndExpand" 
                                 WidthRequest="50" HeightRequest="50" BorderRadius="25" 
-                                Image="previous10.png"/>
+                                Image="procurar.png"/>
                 </Grid>
             </StackLayout>
             <StackLayout Orientation="Vertical" 

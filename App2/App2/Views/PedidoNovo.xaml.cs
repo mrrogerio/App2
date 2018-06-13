@@ -6,6 +6,7 @@ using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -25,6 +26,8 @@ namespace App2.Views
         LoginService clienteLogado = new LoginService();
         List<PedidoItemModel> ped_items = new List<PedidoItemModel>();
         ItemList pItem;
+        static string codigo = "";
+        static Int16 quantidade = 1;
         public PedidoNovo()
         {
             InitializeComponent();
@@ -36,11 +39,11 @@ namespace App2.Views
         {
             base.OnAppearing();
 
-            PedidoModel pedido = new PedidoModel();
-            GlobalVariables.GlobalPedido = pedido;
+            //PedidoModel pedido = new PedidoModel();
+            //GlobalVariables.GlobalPedido = pedido;
 
-            ClienteModel cliente = new ClienteModel();
-            GlobalVariables.GlobalClientePedido = cliente;
+            //ClienteModel cliente = new ClienteModel();
+            //GlobalVariables.GlobalClientePedido = cliente;
 
             //Invoke on Main thread, or this won't work
             Device.BeginInvokeOnMainThread(() =>
@@ -52,14 +55,16 @@ namespace App2.Views
             ECcodigo.Completed += (s, e) =>
             {
                 ECqtde.Keyboard = Keyboard.Numeric;
+                codigo = ECcodigo.Text;
                 ECqtde.Focus();
-                lblItemSelecionado.TextColor = Color.FromHex("#3B5998");
+                lblItemSelecionado.TextColor = Xamarin.Forms.Color.FromHex("#3B5998");
                 BuscaNomeProduto();
             };
 
             ECqtde.Completed += (s, e) =>
             {
                 ECcodigo.Keyboard = Keyboard.Numeric;
+                quantidade = Convert.ToInt16(ECqtde.Text);
                 InserirItem(s, e);
                 ECcodigo.Text = "";
             };
@@ -92,6 +97,7 @@ namespace App2.Views
             {
                 if (!string.IsNullOrEmpty(ECcodigo.Text))
                 {
+                    lblItemDigitado.TextColor = Xamarin.Forms.Color.FromHex("#3B5998");
                     ProdutosService prodService = new ProdutosService();
                     List<ProdutosModel> prod = new List<ProdutosModel>();
                     prod = await prodService.BuscaProdutosPorCodigo(ECcodigo.Text, GlobalVariables.campanha);
@@ -102,7 +108,7 @@ namespace App2.Views
                     }
                     else
                     {
-                        lblItemDigitado.TextColor = Color.Red;
+                        lblItemDigitado.TextColor = Xamarin.Forms.Color.Red;
                         lblItemSelecionado.HorizontalTextAlignment = TextAlignment.Center;
                         lblItemDigitado.Text = "Produto Inexistente";
                     }
@@ -315,19 +321,22 @@ namespace App2.Views
                     await DisplayAlert("Alerta!", "Sem conexão com à Internet.", "OK");
                     return;
                 }
-                if (string.IsNullOrEmpty(ECqtde.Text))
+                if (quantidade == 0)
                 {
-                    ECqtde.Text = "1";
+                    quantidade = 1;
                 }
                 ProdutosService prodService = new ProdutosService();
                 List<ProdutosModel> prod = new List<ProdutosModel>();
-                if (ECqtde.Text == "0")
+
+                codigo = ECcodigo.Text?.Trim();
+
+                if (quantidade == 0)
                 {
                     PedidoItemService novoItem = new PedidoItemService();
-                    var answer = await DisplayAlert("Alerta!", "Deseja excluir o item" + ECcodigo.Text + "? ", "Sim", "Não");
+                    var answer = await DisplayAlert("Alerta!", "Deseja excluir o item" + codigo + "? ", "Sim", "Não");
                     if (answer)
                     {
-                        var deletou = await novoItem.DeletaPedidoItem(GlobalVariables.GlobalPedido.IdPedido, ECcodigo.Text);
+                        var deletou = await novoItem.DeletaPedidoItem(GlobalVariables.GlobalPedido.IdPedido, codigo);
                         if (deletou > 0)
                         {
                             await DisplayAlert("Alerta!", "Item deletado com sucesso.", "OK");
@@ -343,7 +352,7 @@ namespace App2.Views
                     ECcodigo.Focus();
                     return;
                 }
-                prod = await prodService.BuscaProdutosPorCodigo(ECcodigo.Text, GlobalVariables.campanha);
+                prod = await prodService.BuscaProdutosPorCodigo(codigo, GlobalVariables.campanha);
 
                 if (prod != null && prod.Count > 0)
                 {
@@ -358,7 +367,7 @@ namespace App2.Views
                     item.IdProduto = prod[0].IdProduto;
                     item.NomeProduto = prod[0].NomeProduto;
                     item.CodigoProduto = prod[0].Codigo;
-                    item.Quantidade = Convert.ToInt16(ECqtde.Text);
+                    item.Quantidade = quantidade;
                     item.ValorProduto = prod[0].Preco;
                     item.PercentualDesconto = (decimal)GlobalVariables.percDesconto;
                     item.PercentualDescontoDist = prod[0].DescDist;
@@ -862,19 +871,11 @@ namespace App2.Views
                     pedItem = await Item.BuscaItemPorCodigoOuDescricao(GlobalVariables.GlobalPedido.IdPedido, e.NewTextValue);
                     if (pedItem == null || pedItem.Count == 0)
                     {
-                        // esconde o listview e exibe o label
-                        // exibe a mensagem no label
                         listViewItem.IsVisible = false;
-                        //lblmsg.IsVisible = true;
-                        //lblmsg.Text = "Produto não encontrado.";
-                        //lblmsg.TextColor = Color.Red;
                     }
                     else
                     {
-                        // exibe o listview e esconde o label 
-                        // exibe a lista de produtos
                         listViewItem.IsVisible = true;
-                        //lblmsg.IsVisible = false;
                         listViewItem.ItemsSource = pedItem;
                         listViewItem.BindingContext = pedItem;
                     }
@@ -885,22 +886,15 @@ namespace App2.Views
                     pedItem = await Item.BuscaItemPorIdPedido(GlobalVariables.GlobalPedido.IdPedido);
                     if (pedItem.Count > 0)
                     {
-                        // exibe o listview e esconde o label 
-                        // exibe a lista de produtos
                         listViewItem.IsVisible = true;
-                        //lblmsg.IsVisible = false;
                         listViewItem.ItemsSource = pedItem;
                         listViewItem.BindingContext = pedItem;
                     }
                     else
                     {
-                        // esconde o listview e exibe o label coma mensagem
                         listViewItem.IsVisible = false;
-                        //lblmsg.IsVisible = true;
-                        //lblmsg.Text = "Digite a descrição ou código do produto.";
                     }
                 }
-
             }
             catch (Exception)
             {
