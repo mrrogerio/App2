@@ -328,8 +328,6 @@ namespace App2.Views
                 ProdutosService prodService = new ProdutosService();
                 List<ProdutosModel> prod = new List<ProdutosModel>();
 
-                codigo = ECcodigo.Text?.Trim();
-
                 if (quantidade == 0)
                 {
                     PedidoItemService novoItem = new PedidoItemService();
